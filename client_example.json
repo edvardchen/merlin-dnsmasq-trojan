@@ -1,0 +1,25 @@
+{
+  "log": { "loglevel": "error" },
+  "inbounds": [
+    // 接收 iptables 转发的请求
+    {
+      "protocol": "dokodemo-door",
+      "port": 1081,
+      "settings": { "network": "tcp", "followRedirect": true }
+    },
+    // 接收 dns 请求
+    {
+      "port": 1053,
+      "protocol": "dokodemo-door",
+      "settings": { "network": "udp", "address": "1.1.1.1", "port": 53 }
+    },
+    // 以下两个可选，对外暴露的代理端口，方便测试 v2ray server 的可用性
+    { "protocol": "socks", "settings": { "udp": false, "auth": "noauth" }, "port": "1080" },
+    { "protocol": "http", "settings": { "timeout": 360 }, "port": "1087" }
+  ],
+  "outbounds": [
+    {
+      // v2ray server 节点
+    }
+  ]
+}

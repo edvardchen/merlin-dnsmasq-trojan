@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -e
+
+ssh_server=${ssh_server:-192.168.1.1}
+
+v2ray_version=4.33.0
+arch=linux-arm32-v5
+config_home=/etc/v2ray
+
+# 1. download v2ray
+curl -LO https://github.com/v2fly/v2ray-core/releases/download/v${v2ray_version}/v2ray-${arch}.zip
+unzip v2ray-${arch}.zip -d v2ray-${arch}
+
+# 2. upload files to router
+# scripts
+rsync -av v2ray-$arch/v2* $ssh_server:/opt/bin/
+rsync -av apply_iptables $ssh_server:/opt/bin/apply_iptables
+rsync -av S22v2ray $ssh_server:/opt/etc/init.d/S22v2ray
+# configs
+rsync -av configs/ $ssh_server:$config_home/
+rsync -av $v2ray_config $ssh_server:$config_home/$(basename $v2ray_config)
+rsync -av jffs/ $ssh_server:/jffs/scripts/
+# custom dnsmasq config
+# 解析国外域名并保存到 ipset 中
+ssh $ssh_server "echo \"conf-dir=$config_home, *.hosts\" > /jffs/configs/dnsmasq.conf.add"
+
+# 3. run scripts on router
+# 重启 dnsmasq
+ssh $ssh_server "service dnsmasq_restart"
+
+# 创建对应的 ipset，转发其中的 ip 到 v2ray
+ssh $ssh_server "/jffs/scripts/wan-event 1 connected"

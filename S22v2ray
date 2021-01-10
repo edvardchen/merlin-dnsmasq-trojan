@@ -1,0 +1,13 @@
+#!/bin/sh
+
+CONFIG_HOME=/etc/v2ray
+ENABLED=yes
+PROCS=v2ray
+ARGS="-config $CONFIG_HOME/client.json"
+PREARGS=""
+DESC=$PROCS
+PATH=/opt/sbin:/opt/bin:/opt/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+[ -z "$(which $PROCS)" ] && exit 0
+
+. /opt/etc/init.d/rc.func
