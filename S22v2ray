@@ -1,9 +1,9 @@
 #!/bin/sh
 
-CONFIG_HOME=/etc/v2ray
+CONFIG_PATH=/jffs/configs/v2ray/private_v2ray_client.json
 ENABLED=yes
 PROCS=v2ray
-ARGS="-config $CONFIG_HOME/client.json"
+ARGS="-config $CONFIG_PATH"
 PREARGS=""
 DESC=$PROCS
 PATH=/opt/sbin:/opt/bin:/opt/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin

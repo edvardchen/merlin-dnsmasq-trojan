@@ -72,8 +72,9 @@
 3. 运行本项目安装脚本
 
    ```bash
-   ssh_server=your_router v2ray_config=your_v2ray_client_config ./install
+   ssh_server=your_router router_config_dir=your_config_dir_on_router v2ray_config=your_v2ray_client_config ./install
    ```
 
    - `ssh_server` 默认是 `192.168.1.1`
+   - `router_config_dir` 默认是 `/jffs/configs/v2ray`
    - `v2ray_config` 必传
