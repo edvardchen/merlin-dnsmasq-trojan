@@ -9,31 +9,56 @@ arch=linux-arm32-v5
 config_home=${router_config_dir:-/jffs/configs/v2ray}
 router_v2ray_config_path=$config_home/$(basename $v2ray_config)
 
-# 1. download v2ray
-curl -LO https://github.com/v2fly/v2ray-core/releases/download/v${v2ray_version}/v2ray-${arch}.zip
-unzip v2ray-${arch}.zip -d v2ray-${arch}
+#
+# ─── V2RAY ──────────────────────────────────────────────────────────────────────
+#
 
-# 2. upload files to router
-# scripts
+# download, extract and upload v2ray
+v2ray_zip=v2ray-${arch}.zip
+if [[ ! -e $v2ray_zip ]]; then
+  curl -LO https://github.com/v2fly/v2ray-core/releases/download/v${v2ray_version}/${v2ray_zip}
+  unzip v2ray-${arch}.zip -d v2ray-${arch}
+fi
 rsync -av v2ray-$arch/v2* $ssh_server:/opt/bin/
-sed -i.bak "s|^\(config_home=\).*|\1$config_home|" apply_iptables
-rsync -av apply_iptables $ssh_server:/opt/bin/apply_iptables
+
+# upload client config
+rsync -av $v2ray_config $ssh_server:$router_v2ray_config_path
+
+# start v2ray after every reboot
 sed -i.bak "s|^\(CONFIG_PATH=\).*|\1$router_v2ray_config_path|" S22v2ray
 rsync -av S22v2ray $ssh_server:/opt/etc/init.d/S22v2ray
-# configs
+
+# start v2ray now
+ssh $ssh_server "/opt/etc/init.d/S22v2ray start"
+# ────────────────────────────────────────────────────────────────────────────────
+
+#
+# ─── DNSMASQ ────────────────────────────────────────────────────────────────────
+#
+
+# upload configs
 rsync -av configs/ $ssh_server:$config_home/
-rsync -av $v2ray_config $ssh_server:$router_v2ray_config_path
-rsync -av jffs/ $ssh_server:/jffs/scripts/
-# custom dnsmasq config
+
+# add apply_iptables command and run once
+# apply_tables would create ipsets
+sed -i.bak "s|^\(config_home=\).*|\1$config_home|" apply_iptables
+rsync -av apply_iptables $ssh_server:/opt/bin/apply_iptables
+ssh $ssh_server "apply_iptables"
+
+# let dnsmasq use custom dnsmasq config
 # 解析国外域名并保存到 ipset 中
 ssh $ssh_server "echo \"conf-dir=$config_home, *.hosts\" > /jffs/configs/dnsmasq.conf.add"
 
-# 3. run scripts on router
-# 启动 v2ray
-ssh $ssh_server "/opt/etc/init.d/S22v2ray start"
-
 # 重启 dnsmasq
 ssh $ssh_server "service dnsmasq_restart"
+# ────────────────────────────────────────────────────────────────────────────────
 
-# 创建对应的 ipset，转发其中的 ip 到 v2ray
+#
+# ─── JFFS ───────────────────────────────────────────────────────────────────────
+#
+
+rsync -av jffs/ $ssh_server:/jffs/scripts/
+
+# start the cru job
 ssh $ssh_server "/jffs/scripts/wan-event 1 connected"
+# ────────────────────────────────────────────────────────────────────────────────
