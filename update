@@ -1,4 +1,6 @@
 #!/bin/bash
 
+echo "update gw..."
 sh -c "$(curl -sSL https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/master/gfwlist2dnsmasq.sh)" -- -p 1053 -s gw -o configs/gw.hosts
-curl -sSL https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/adblock-for-dnsmasq.conf -o configs/ad.hosts
+echo "update ad..."
+curl -L https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/adblock-for-dnsmasq.conf -o configs/ad.hosts
