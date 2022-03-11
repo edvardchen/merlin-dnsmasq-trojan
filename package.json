@@ -1,0 +1,22 @@
+{
+  "name": "merlin-dnsmasq-v2ray",
+  "version": "1.0.0",
+  "description": "1. 刷官方 merlin 固件",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edvardchen/merlin-dnsmasq-v2ray.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edvardchen/merlin-dnsmasq-v2ray/issues"
+  },
+  "homepage": "https://github.com/edvardchen/merlin-dnsmasq-v2ray#readme",
+  "dependencies": {
+    "zx": "^4.0.0"
+  }
+}
