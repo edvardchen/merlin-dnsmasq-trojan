@@ -1,1 +1,1 @@
-conf-dir=$config_home, *.hosts
+conf-dir=$config_home/trojan/host-configs, *.hosts
