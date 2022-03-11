@@ -13,7 +13,7 @@ service dnsmasq_restart
 # use iptables to forward gw traffic
 mv ./apply_iptables /opt/bin/
 # first time
-apply_tables
+apply_iptables
 
 # check regularly
 mv ./jffs-scripts/* /jffs/scripts/

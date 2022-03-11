@@ -19,6 +19,8 @@ await $`rsync -av ./trojan ${sshServer}:${configFolder}`;
 const command = `cd ${configFolder}/trojan && sh ./setup.sh`;
 await $`ssh ${sshServer} ${command}`;
 
+await $`git checkout .`;
+
 async function replaceText(file, fn) {
   const original = await fs.readFile(file, "utf8");
   await fs.writeFile(file, fn(original));
