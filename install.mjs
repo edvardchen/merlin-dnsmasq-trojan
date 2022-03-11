@@ -13,6 +13,10 @@ for (const file of ["./trojan/apply_iptables", "./trojan/dnsmasq.conf.add"]) {
   });
 }
 
+await replaceText("./trojan/ServiceTrojan", (content) =>
+  content.replace("$CONFIG_PATH", `${configFolder}/trojan/client.json`)
+);
+
 // upload essential resources
 await $`rsync -av ./trojan ${sshServer}:${configFolder}`;
 
