@@ -4,8 +4,6 @@ set -e
 
 ssh_server=${ssh_server:-192.168.1.1}
 
-v2ray_version=4.33.0
-arch=linux-arm32-v5
 config_home=${router_config_dir:-/jffs/configs/v2ray}
 router_v2ray_config_path=$config_home/$(basename $v2ray_config)
 

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# 如果 DHCP 重新分配 IP 地址时, 会清除 iptables rule, 此时重新应用 iptables
+apply_iptables
