@@ -16,7 +16,7 @@ for (const file of ["./trojan/apply_iptables", "./trojan/dnsmasq.conf.add"]) {
 // upload essential resources
 await $`rsync -av ./trojan ${sshServer}:${configFolder}`;
 
-const command = `sh ${configFolder}/trojan/setup.sh`;
+const command = `cd ${configFolder}/trojan && sh ./setup.sh`;
 await $`ssh ${sshServer} ${command}`;
 
 async function replaceText(file, fn) {
