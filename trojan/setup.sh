@@ -2,8 +2,9 @@
 
 # setup trojan
 mv ./trojan-go-linux-arm/trojan-go /opt/bin/
-mv ./ServiceTrojan /opt/etc/init.d/ServiceTrojan
-/opt/etc/init.d/ServiceTrojan start
+mv ./trojan-nat ./trojan-forward /opt/etc/init.d/
+/opt/etc/init.d/trojan-nat start
+/opt/etc/init.d/trojan-forward start
 
 # domain -> ipset
 mv ./dnsmasq.conf.add /jffs/configs/

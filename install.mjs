@@ -7,15 +7,16 @@ const trojanZip = "trojan-go-linux-arm.zip";
 await $`unzip ./trojan/${trojanZip} -d ./trojan/trojan-go-linux-arm`;
 
 // replace config_home with user defined folder
-for (const file of ["./trojan/apply_iptables", "./trojan/dnsmasq.conf.add"]) {
+for (const file of [
+  "./trojan/apply_iptables",
+  "./trojan/dnsmasq.conf.add",
+  "./trojan/trojan-nat",
+  "./trojan/trojan-forward",
+]) {
   await replaceText(file, (content) => {
     return content.replace(/\$config_home/g, configFolder).replace(/\$port/g, port);
   });
 }
-
-await replaceText("./trojan/ServiceTrojan", (content) =>
-  content.replace("$CONFIG_PATH", `${configFolder}/trojan/client.json`)
-);
 
 // upload essential resources
 await $`rsync -av ./trojan ${sshServer}:${configFolder}`;
