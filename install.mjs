@@ -4,14 +4,13 @@ const [, , , sshServer = "10.0.2.1", configFolder = "/jffs/jianhua", port = "108
 
 // unzip trojan
 const trojanZip = "trojan-go-linux-arm.zip";
-await $`unzip ./trojan/${trojanZip} -d ./trojan/trojan-go-linux-arm`;
+await $`unzip -o ./trojan/${trojanZip} -d ./trojan/trojan-go-linux-arm`;
 
 // replace config_home with user defined folder
 for (const file of [
   "./trojan/apply_iptables",
   "./trojan/dnsmasq.conf.add",
-  "./trojan/trojan-nat",
-  "./trojan/trojan-forward",
+  "./trojan/start_trojan",
 ]) {
   await replaceText(file, (content) => {
     return content.replace(/\$config_home/g, configFolder).replace(/\$port/g, port);
