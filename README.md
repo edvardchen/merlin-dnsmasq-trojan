@@ -37,23 +37,10 @@
    opkg install rsync
    ```
 
-2. 准备以透明代理模式运行的 trojan 配置 `nat.json`，置于 `trojan/trojan-configs`目录下
+2. 参考 `example-configs/trojan` 准备两个 trojan 配置，置于 `trojan/trojan-configs`目录下
 
-   ```jsonc
-   {
-     "run_type": "nat",
-     "local_addr": "0.0.0.0",
-     "local_port": 1080,
-     "remote_addr": "YOUR_REMOTE_ADDR",
-     "remote_port": 443,
-     "password": ["YOUR_PWD"],
-     "log_level": 1,
-     "log_file": "/jffs/home/nat.log",
-     "ssl": {
-       // YOUR TLS SETTINGS
-     }
-   }
-   ```
+   1. `nat.json` 用于透明代理
+   2. `forward.json` 用于转发 DNS 查询请求
 
 3. 运行本项目安装脚本
 

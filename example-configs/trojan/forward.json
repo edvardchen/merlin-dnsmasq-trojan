@@ -1,0 +1,15 @@
+{
+  "run_type": "forward",
+  "local_addr": "0.0.0.0",
+  "local_port": 1053,
+  "remote_addr": "FIXME",
+  "remote_port": 443,
+  "password": ["FIXME"],
+  "log_level": 1,
+  "log_file": "/jffs/home/forward.log",
+  "target_addr": "1.1.1.1",
+  "target_port": 53,
+  "ssl": {
+    // YOUR SERVER TLS SETTINGS
+  }
+}

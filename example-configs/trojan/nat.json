@@ -1,0 +1,13 @@
+{
+  "run_type": "nat",
+  "local_addr": "0.0.0.0",
+  "local_port": 1080,
+  "remote_addr": "FIXME",
+  "remote_port": 443,
+  "password": ["FIXME"],
+  "log_level": 1,
+  "log_file": "/jffs/home/nat.log",
+  "ssl": {
+    // YOUR SERVER TLS SETTINGS
+  }
+}
