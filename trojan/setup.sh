@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
 # setup trojan
+unzip -o trojan-go-linux-arm.zip -d ./trojan-go-linux-arm
 cp ./trojan-go-linux-arm/trojan-go /opt/bin/
 sh ./start_trojan
 
