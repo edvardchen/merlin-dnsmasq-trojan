@@ -18,8 +18,8 @@ rm -rf ./trojan-go-linux-arm
 rm trojan-go-linux-arm.zip
 
 mv ./scripts/* /opt/bin/
-start_trojan
-apply_iptables
+start-trojan
+apply-iptables
 
 # check regularly
 mv ./jffs-scripts/* /jffs/scripts/
