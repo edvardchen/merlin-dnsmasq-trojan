@@ -37,44 +37,26 @@
    opkg install rsync
    ```
 
-2. 准备 v2ray_config
+2. 准备以透明代理模式运行的 trojan 配置 `nat.json`，置于 `trojan/trojan-configs`目录下
 
-   例子如下：
-
-   ```json
+   ```jsonc
    {
-     "log": { "loglevel": "error" },
-     "inbounds": [
-       // 接收 iptables 转发的请求
-       {
-         "protocol": "dokodemo-door",
-         "port": 1081,
-         "settings": { "network": "tcp", "followRedirect": true }
-       },
-       // 接收 dns 请求
-       {
-         "port": 1053,
-         "protocol": "dokodemo-door",
-         "settings": { "network": "udp", "address": "1.1.1.1", "port": 53 }
-       },
-       // 以下两个可选，对外暴露的代理端口，方便测试 v2ray server 的可用性
-       { "protocol": "socks", "settings": { "udp": false, "auth": "noauth" }, "port": "1080" },
-       { "protocol": "http", "settings": { "timeout": 360 }, "port": "1087" }
-     ],
-     "outbounds": [
-       {
-         // v2ray server 节点
-       }
-     ]
+     "run_type": "nat",
+     "local_addr": "0.0.0.0",
+     "local_port": 1080,
+     "remote_addr": "YOUR_REMOTE_ADDR",
+     "remote_port": 443,
+     "password": ["YOUR_PWD"],
+     "log_level": 1,
+     "log_file": "/jffs/home/nat.log",
+     "ssl": {
+       // YOUR TLS SETTINGS
+     }
    }
    ```
 
 3. 运行本项目安装脚本
 
    ```bash
-   ssh_server=your_router router_config_dir=your_config_dir_on_router v2ray_config=your_v2ray_client_config ./install
+   yarn zx ./install-trojan.mjs
    ```
-
-   - `ssh_server` 默认是 `192.168.1.1`
-   - `router_config_dir` 默认是 `/jffs/configs/v2ray`
-   - `v2ray_config` 必传
