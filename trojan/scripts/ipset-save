@@ -1,4 +1,5 @@
 #!/bin/sh
 
-ipset save >/jffs/configs/ipset-configs/gw.ips
-ipset save >/jffs/configs/ipset-configs/backup.ips
+ipset list gw &&
+  ipset save >/jffs/configs/ipset-configs/gw.ips &&
+  ipset save >/jffs/configs/ipset-configs/backup.ips
