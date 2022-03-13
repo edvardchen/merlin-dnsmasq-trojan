@@ -1,1 +1,1 @@
-conf-dir=$config_home/trojan/host-configs, *.hosts
+conf-dir=/jffs/configs/dnsmasq-configs, *.hosts

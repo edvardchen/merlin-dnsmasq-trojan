@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ipset -R </jffs/configs/ipset-configs/gw.ips

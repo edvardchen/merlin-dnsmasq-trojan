@@ -1,2 +1,0 @@
-trojan-go --config $config_home/trojan/forward.json &
-trojan-go --config $config_home/trojan/nat.json &
