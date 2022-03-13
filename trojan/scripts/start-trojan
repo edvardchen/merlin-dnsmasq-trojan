@@ -1,4 +1,6 @@
 #!/bin/sh
 
-trojan-go --config /jffs/configs/trojan-configs/forward.json &
-trojan-go --config /jffs/configs/trojan-configs/nat.json &
+if [ -z "$(pidof trojan-go)" ]; then
+  trojan-go --config /jffs/configs/trojan-configs/forward.json &
+  trojan-go --config /jffs/configs/trojan-configs/nat.json &
+fi
