@@ -3,6 +3,6 @@
 # primary wan and connected
 if [[ $1==0 && $2==connected ]]; then
   cru a run-iptables "*/3 * * * *" "apply-iptables" # every 3min
-  cru a run-iptables "*/3 * * * *" "ipset-save"
-  cru a run-v2ray "*/10 * * * *" "start-trojan" # every 10min
+  cru a run-ipset-save "*/3 * * * *" "ipset-save"
+  cru a run-trojan "*/10 * * * *" "start-trojan" # every 10min
 fi
