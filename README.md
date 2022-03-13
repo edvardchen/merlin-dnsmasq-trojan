@@ -31,19 +31,13 @@
 
 ## Installation
 
-1. 在路由器上安装 rsync
-
-   ```bash
-   opkg install rsync
-   ```
-
-2. 参考 `example-configs/trojan` 准备两个 trojan 配置，置于 `trojan/trojan-configs`目录下
+1. 参考 `example-configs/trojan` 准备两个 trojan 配置，置于 `trojan/trojan-configs`目录下
 
    1. `nat.json` 用于透明代理
    2. `forward.json` 用于转发 DNS 查询请求
 
-3. 运行本项目安装脚本
+2. 运行本项目安装脚本
 
    ```bash
-   yarn zx ./install-trojan.mjs
+   yarn zx ./install-trojan.mjs your_router_server
    ```
