@@ -13,5 +13,6 @@ else
   # restore ipset
   ipset-restore
   iptables -t nat -A PREROUTING -p tcp -m set --match-set gw dst -j REDIRECT --to-port 1080
+  iptables -t nat -A PREROUTING -p udp -m set --match-set gw dst -j REDIRECT --to-port 1080
   echo added gw rule
 fi
