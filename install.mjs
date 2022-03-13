@@ -6,6 +6,8 @@ const [, , , sshServer = "10.0.2.1", configFolder = "/jffs/jianhua", port = "108
 for (const file of [
   "./trojan/apply_iptables",
   "./trojan/dnsmasq.conf.add",
+  "./trojan/jffs-scripts/services-start",
+  "./trojan/jffs-scripts/wan-event",
   "./trojan/start_trojan",
 ]) {
   await replaceText(file, (content) => {

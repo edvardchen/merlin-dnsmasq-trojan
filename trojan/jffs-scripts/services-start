@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sh $config_home/trojan/start_trojan
