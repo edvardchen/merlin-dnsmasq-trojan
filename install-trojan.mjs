@@ -1,6 +1,6 @@
 const { fs } = require("zx");
 
-const [, , , sshServer = "10.0.2.1", port = "1081"] = process.argv;
+const [, , , sshServer = "192.168.2.1", port = "1080"] = process.argv;
 
 await $`ssh ${sshServer} "opkg install rsync"`;
 

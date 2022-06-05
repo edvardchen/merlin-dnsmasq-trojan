@@ -5,7 +5,7 @@ rm -rf /jffs/configs/dnsmasq-configs /jffs/configs/ipset-configs /jffs/configs/t
 mv -f ./dnsmasq-configs ./ipset-configs ./trojan-configs /jffs/configs/
 # domain -> ipset
 # make sure dnsmasq.conf.add is placed in /jffs/configs
-# mv ./dnsmasq.conf.add /jffs/configs/
+mv ./dnsmasq.conf.add /jffs/configs/
 # 重启 dnsmasq
 service dnsmasq_restart
 

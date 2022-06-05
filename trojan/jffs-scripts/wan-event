@@ -5,4 +5,5 @@ if [[ $1==0 && $2==connected ]]; then
   cru a run-iptables "*/3 * * * *" "apply-iptables" # every 3min
   cru a run-ipset-save "*/3 * * * *" "ipset-save"
   cru a run-trojan "*/10 * * * *" "start-trojan" # every 10min
+  cru a run-trojan "0 * * * *" "restart-trojan"  # every 1 hour
 fi
